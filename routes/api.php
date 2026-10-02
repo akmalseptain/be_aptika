@@ -1450,6 +1450,20 @@ Route::middleware(['auth:sanctum', 'active'])->group(function () {
                     'update'  => 'smki.rencana-audit.update',
                     'destroy' => 'smki.rencana-audit.destroy',
                 ]);
+
+            // Berita Acara Screening Karyawan Outsourcing (FR-012/KOM.03.05/SANDIKAMI)
+            Route::get('screening-karyawan/lookup', [\App\Http\Controllers\Smki\SmkiScreeningKaryawanController::class, 'lookup'])
+                ->name('smki.screening-karyawan.lookup');
+            Route::get('screening-karyawan/{id}/print', [\App\Http\Controllers\Smki\SmkiScreeningKaryawanController::class, 'printHtml'])
+                ->name('smki.screening-karyawan.print');
+            Route::apiResource('screening-karyawan', \App\Http\Controllers\Smki\SmkiScreeningKaryawanController::class)
+                ->names([
+                    'index'   => 'smki.screening-karyawan.index',
+                    'store'   => 'smki.screening-karyawan.store',
+                    'show'    => 'smki.screening-karyawan.show',
+                    'update'  => 'smki.screening-karyawan.update',
+                    'destroy' => 'smki.screening-karyawan.destroy',
+                ]);
         });
 
     // ========================================================
@@ -1461,6 +1475,11 @@ Route::middleware(['auth:sanctum', 'active'])->group(function () {
     Route::get('daftar-aset-ti/export-excel', [\App\Http\Controllers\DaftarAsetTiController::class, 'exportExcel'])
         ->name('daftar-aset-ti.export-excel');
     Route::apiResource('daftar-aset-ti', \App\Http\Controllers\DaftarAsetTiController::class);
+
+    // Screening Karyawan Outsourcing Standalone routes
+    Route::get('screening-karyawan/lookup', [\App\Http\Controllers\Smki\SmkiScreeningKaryawanController::class, 'lookup']);
+    Route::get('screening-karyawan/{id}/print', [\App\Http\Controllers\Smki\SmkiScreeningKaryawanController::class, 'printHtml']);
+    Route::apiResource('screening-karyawan', \App\Http\Controllers\Smki\SmkiScreeningKaryawanController::class);
 });
 
 

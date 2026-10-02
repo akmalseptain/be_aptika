@@ -15,4 +15,8 @@ Route::get('/storage/{path}', function ($path) {
     return response()->file($filePath);
 })->where('path', '.*');
 
+// Printable Berita Acara FR-012/KOM.03.05/SANDIKAMI
+Route::get('/smki/screening-karyawan/{id}/print', [\App\Http\Controllers\Smki\SmkiScreeningKaryawanController::class, 'printHtml'])
+    ->name('web.screening-karyawan.print');
+
 require __DIR__.'/auth.php';
